@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Text, View, SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, TextInput, Modal, Pressable, ScrollView } from 'react-native'
+import { Text, View, SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, TextInput, Modal, Pressable, ScrollView, StatusBar } from 'react-native'
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import TaskItem, { OnChangeAction, TaskChangeTypes } from "../components/TaskItem.component";
@@ -11,9 +11,10 @@ import { TaskModel } from "../models/task.model";
 import { DEFAULT_COLORS } from "../global-styles/colors";
 import { TEXT_SIZES } from "../global-styles/text.style";
 import uuid from 'react-native-uuid';
+import { Feather, Ionicons } from "@expo/vector-icons";
 const MAX_TASK_TEXT_LENGTH = 50;
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: { navigation: any }) {
     const dispatch = useAppDispatch();
     const tasks = useAppSelector((selector) => selector.tasks)
     const completedtasks = useAppSelector((selector) => selector.completed)
@@ -77,7 +78,7 @@ export default function HomeScreen() {
         }
     }
     const onTextInputValueChange = (text: string) => {
-        if (text[text.length-1] === '\n'){
+        if (text[text.length - 1] === '\n') {
             taskInputRef.current?.blur();
             onTaskSubmit(taskInputValue, taskTargetId)
             return
@@ -87,13 +88,25 @@ export default function HomeScreen() {
     return (
 
         <GestureHandlerRootView style={[styles.content, styles.flex1]}>
+
+
+
+            <StatusBar
+                animated={true}
+                backgroundColor={DEFAULT_COLORS.primary}
+            />
+
             <SafeAreaView style={[styles.flex1, styles.scrollWrapper]}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 200 }}>
                     {tasks.map((task) => <TaskItem title={task.title} completed={false} onChange={(completed: boolean, changeType: TaskChangeTypes) => { onTaskChange(task, changeType, completed, false) }} key={task.id}></TaskItem>)}
                     {completedtasks.map((task) => <TaskItem title={task.title} completed={true} onChange={(completed: boolean, changeType: TaskChangeTypes) => { onTaskChange(task, changeType, completed, true) }} key={task.id}></TaskItem>)}
                 </ScrollView>
-            </SafeAreaView>
 
+            </SafeAreaView>
+            <Pressable onPress={() => { navigation.navigate('Guide') }} style={[styles.guideButton]}>
+
+                <Feather name="book" size={42} color={DEFAULT_COLORS.secondary} />
+            </Pressable>
             <AddItemZone onTriger={openTaskAddModal}></AddItemZone>
             <Modal
                 animationType='fade'
@@ -139,7 +152,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollWrapper: {
-        paddingTop: 20
     },
     inputText: {
         fontSize: TEXT_SIZES.big,
@@ -148,6 +160,14 @@ const styles = StyleSheet.create({
     modalContent: {
         paddingHorizontal: 20,
         backgroundColor: DEFAULT_COLORS.primary
+    },
+    guideButton: {
+        position: 'absolute',
+        right: 30,
+        bottom: 40,
+        width: 40,
+        height: 40,
+        zIndex: 1
     }
 })
 

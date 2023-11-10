@@ -1,5 +1,6 @@
 {
   "expo": {
+    "main": "app.tsx",
     "name": "thePoP",
     "slug": "thePoP",
     "version": "1.0.0",
@@ -21,10 +22,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.romanivkvas.thePoP"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7e9f5dfd-bb92-45f3-b37a-3ffed8ac4a22"
+      }
     }
   }
 }
