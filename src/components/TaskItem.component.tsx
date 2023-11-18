@@ -11,9 +11,9 @@ import Animated, {
 import { TEXT_SIZES } from "../global-styles/text.style";
 import { DEFAULT_COLORS } from "../global-styles/colors";
 
-const MIN_HORIZONTAL_SWIPE_DISTANCE = 15;
+const MIN_HORIZONTAL_SWIPE_DISTANCE = 20;
 const MIN_HORIZONTAL_ACTIVATION_DISTANCE = 10;
-const MAX_VERTICAL_SWIPE_DISTANCE = 10;
+const VERTICAL_SLOP_DISTANCE = 30;
 
 export enum TaskChangeTypes {
     update,
@@ -35,7 +35,7 @@ export default function TaskItem({ title, completed, onChange }: { title: string
             startPositionX.value = e.changedTouches[0].x;
         })
         .onTouchesMove((e, state) => {
-            if(Math.abs(e.changedTouches[0].y -  startPositionY.value) > MAX_VERTICAL_SWIPE_DISTANCE){
+            if(Math.abs(e.changedTouches[0].y -  startPositionY.value) > VERTICAL_SLOP_DISTANCE){
                 if(Platform.OS === 'android') state.fail();
                 if(Platform.OS === 'ios') state.end();
             }
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     box: {
         width: '100%',
         minHeight: 40,
-        marginVertical: 2,
         padding: 5,
         justifyContent: 'center',
         paddingHorizontal: 20,

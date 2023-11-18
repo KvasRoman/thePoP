@@ -1,6 +1,5 @@
 {
   "expo": {
-    "main": "app.tsx",
     "name": "thePoP",
     "slug": "thePoP",
     "version": "1.0.0",

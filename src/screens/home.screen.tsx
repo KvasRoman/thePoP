@@ -97,7 +97,7 @@ export default function HomeScreen({ navigation }: { navigation: any }) {
             />
 
             <SafeAreaView style={[styles.flex1, styles.scrollWrapper]}>
-                <ScrollView contentContainerStyle={{ paddingBottom: 200 }}>
+                <ScrollView contentContainerStyle={{ paddingBottom: 200, paddingTop: 50 }}>
                     {tasks.map((task) => <TaskItem title={task.title} completed={false} onChange={(completed: boolean, changeType: TaskChangeTypes) => { onTaskChange(task, changeType, completed, false) }} key={task.id}></TaskItem>)}
                     {completedtasks.map((task) => <TaskItem title={task.title} completed={true} onChange={(completed: boolean, changeType: TaskChangeTypes) => { onTaskChange(task, changeType, completed, true) }} key={task.id}></TaskItem>)}
                 </ScrollView>
