@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tasks from './task.reducer'
-import finishedTasks from './finished-task.reducer'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";

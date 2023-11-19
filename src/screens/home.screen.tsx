@@ -1,17 +1,17 @@
 import React, { useRef, useState } from "react";
-import { Text, View, SafeAreaView, StyleSheet, KeyboardAvoidingView, Platform, TextInput, Modal, Pressable, ScrollView, StatusBar } from 'react-native'
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { View, SafeAreaView, StyleSheet, TextInput, Modal, Pressable, ScrollView, StatusBar } from 'react-native'
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import TaskItem, { OnChangeAction, TaskChangeTypes } from "../components/TaskItem.component";
-import { GestureDetector, GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
+import TaskItem, { TaskChangeTypes } from "../components/TaskItem.component";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AddItemZone from "../components/addItemZone.component";
 import { addTask, deleteTask, moveBack, completeTask, updateTask } from "../redux/task.reducer";
-import { addCompletedTask, deleteCompletedTask } from "../redux/finished-task.reducer";
+
 import { TaskModel } from "../models/task.model";
 import { DEFAULT_COLORS } from "../global-styles/colors";
 import { TEXT_SIZES } from "../global-styles/text.style";
 import uuid from 'react-native-uuid';
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 const MAX_TASK_TEXT_LENGTH = 50;
 
 export default function HomeScreen({ navigation }: { navigation: any }) {

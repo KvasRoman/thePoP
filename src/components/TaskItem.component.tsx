@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Platform, ColorValue } from "react-native";
+import React from "react";
+import { StyleSheet, Platform } from "react-native";
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
     useSharedValue,
-    withTiming,
     useAnimatedStyle,
-    useAnimatedReaction,
     runOnJS
 } from 'react-native-reanimated';
 import { TEXT_SIZES } from "../global-styles/text.style";
@@ -20,8 +18,8 @@ export enum TaskChangeTypes {
     change_status,
     delete
 }
-export type OnChangeAction = (completed: boolean, changeType: TaskChangeTypes) => void 
-export default function TaskItem({ title, completed, onChange }: { title: string, completed: boolean, onChange: OnChangeAction}) {
+export type OnChangeAction = (completed: boolean, changeType: TaskChangeTypes) => void
+export default function TaskItem({ title, completed, onChange }: { title: string, completed: boolean, onChange: OnChangeAction }) {
     const isComplete = useSharedValue(completed)
     const isLockedForChange = useSharedValue(false);
 
@@ -35,11 +33,11 @@ export default function TaskItem({ title, completed, onChange }: { title: string
             startPositionX.value = e.changedTouches[0].x;
         })
         .onTouchesMove((e, state) => {
-            if(Math.abs(e.changedTouches[0].y -  startPositionY.value) > VERTICAL_SLOP_DISTANCE){
-                if(Platform.OS === 'android') state.fail();
-                if(Platform.OS === 'ios') state.end();
+            if (Math.abs(e.changedTouches[0].y - startPositionY.value) > VERTICAL_SLOP_DISTANCE) {
+                if (Platform.OS === 'android') state.fail();
+                if (Platform.OS === 'ios') state.end();
             }
-            else if(Math.abs(e.changedTouches[0].x -  startPositionX.value) > MIN_HORIZONTAL_ACTIVATION_DISTANCE){
+            else if (Math.abs(e.changedTouches[0].x - startPositionX.value) > MIN_HORIZONTAL_ACTIVATION_DISTANCE) {
                 state.activate();
             }
         })

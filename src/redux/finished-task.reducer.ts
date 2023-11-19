@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useAppDispatch } from "./hooks";
-import { addTask } from "./task.reducer";
 import { TaskModel } from "../models/task.model";
 
 const initialState: TaskModel[] = [];

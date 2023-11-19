@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated, { Easing, Keyframe, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { View, StyleSheet, Text, Platform } from "react-native";
 import { DEFAULT_COLORS } from "../../global-styles/colors";
@@ -54,7 +54,7 @@ export default function Guide() {
                         Undo
                     </Text>
                     <Text style={styles.text}>
-                    To undo a task, swipe from left to right
+                        To undo a task, swipe from left to right
                     </Text>
                 </View>
             </View>
@@ -64,8 +64,6 @@ export default function Guide() {
 
 
 function AddTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
-    //(35; 10) left_bottom
-    //(110; 170) right_top
     const animationState = useSharedValue({ x: 0, y: 0, rotation: '35deg', touchingOpacity: 0 })
     useEffect(() => {
         animationState.value = withRepeat(
@@ -76,8 +74,6 @@ function AddTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                 withTiming({ ...anchors.add_panel.bottom_left, rotation: '45deg', touchingOpacity: 1 }, { duration: 300, easing: Easing.ease }),
             ), -1)
     })
-
-    //point.value = withSequence()
     const animatedPoint = useAnimatedStyle(() => ({
         bottom: 0 + animationState.value.y,
         left: 0 + animationState.value.x,
@@ -104,8 +100,6 @@ function AddTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
     )
 }
 function DeleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
-    //(35; 10) left_bottom
-    //(110; 170) right_top
     const animationState = useSharedValue({ x: 0, y: 0, rotation: '35deg', touchingOpacity: 0, textOpacity: 0 })
     const textStateLineThroughOpacity = useSharedValue(1)
     useEffect(() => {
@@ -120,8 +114,6 @@ function DeleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                 withTiming({ ...anchors.task.bellow, rotation: '35deg', touchingOpacity: 0, textOpacity: 0 }, { duration: 500, easing: Easing.ease }),
             ), -1)
     })
-    const text = useSharedValue({ textDecoration: 'none' })
-    //point.value = withSequence()
     const animatedPoint = useAnimatedStyle(() => ({
         bottom: 0 + animationState.value.y,
         left: 0 + animationState.value.x,
@@ -155,8 +147,6 @@ function DeleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
     )
 }
 function CompleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
-    //(35; 10) left_bottom
-    //(110; 170) right_top
     const animationState = useSharedValue({ x: 0, y: 0, rotation: '35deg', touchingOpacity: 0, lineThroughOpacity: 0 })
     const textStateLineThroughOpacity = useSharedValue(1)
     useEffect(() => {
@@ -169,8 +159,6 @@ function CompleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                 withTiming({ ...anchors.task.bellow, rotation: '35deg', touchingOpacity: 0, lineThroughOpacity: 1 }, { duration: 500, easing: Easing.ease }),
             ), -1)
     })
-    const text = useSharedValue({ textDecoration: 'none' })
-    //point.value = withSequence()
     const animatedPoint = useAnimatedStyle(() => ({
         bottom: 0 + animationState.value.y,
         left: 0 + animationState.value.x,
@@ -196,8 +184,10 @@ function CompleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                     <View style={animationStyles.taskListBox}>
                         <Text style={animationStyles.taskText}>Task #1</Text>
                         <Text style={animationStyles.taskText}>Task #2</Text>
-                        <Text style={animationStyles.taskText}>Task #3</Text>
-                        <Animated.View style={[animationStyles.lineThrough, animatedLineThrough]}></Animated.View>
+                        <View style={animationStyles.centered}>
+                            <Text style={animationStyles.taskText}>Task #3</Text>
+                            <Animated.View style={[animationStyles.lineThrough, animatedLineThrough]}></Animated.View>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -205,10 +195,7 @@ function CompleteTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
     )
 }
 function MoveBackTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
-    //(35; 10) left_bottom
-    //(110; 170) right_top
     const animationState = useSharedValue({ x: 0, y: 0, rotation: '35deg', touchingOpacity: 0, lineThroughOpacity: 0 })
-    const textStateLineThroughOpacity = useSharedValue(1)
     useEffect(() => {
         animationState.value = withRepeat(
             withSequence(
@@ -219,8 +206,6 @@ function MoveBackTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                 withTiming({ ...anchors.task.bellow, rotation: '35deg', touchingOpacity: 0, lineThroughOpacity: 0 }, { duration: 500, easing: Easing.ease }),
             ), -1)
     })
-    const text = useSharedValue({ textDecoration: 'none' })
-    //point.value = withSequence()
     const animatedPoint = useAnimatedStyle(() => ({
         bottom: 0 + animationState.value.y,
         left: 0 + animationState.value.x,
@@ -246,8 +231,10 @@ function MoveBackTaskAnimation({ anchors }: { anchors: AnimationAnchors }) {
                     <View style={animationStyles.taskListBox}>
                         <Text style={animationStyles.taskText}>Task #1</Text>
                         <Text style={animationStyles.taskText}>Task #2</Text>
-                        <Text style={animationStyles.taskText}>Task #3</Text>
-                        <Animated.View style={[animationStyles.lineThrough, animatedLineThrough]}></Animated.View>
+                        <View style={animationStyles.centered}>
+                            <Text style={animationStyles.taskText}>Task #3</Text>
+                            <Animated.View style={[animationStyles.lineThrough, animatedLineThrough]}></Animated.View>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -275,14 +262,14 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center'
-    }
+    },
+
 })
 const animationStyles = StyleSheet.create({
 
     phone: {
         width: 160,
         height: 230,
-        //backgroundColor: 'red'
     },
     pointer: {
         position: 'absolute',
@@ -325,12 +312,16 @@ const animationStyles = StyleSheet.create({
     },
     lineThrough: {
         width: 40,
-        height: 1,
+        height: 2,
         backgroundColor: DEFAULT_COLORS.secondary,
         position: 'absolute',
-        bottom: Platform.OS === 'ios' ? 80 : 75,
-        left: 13
+        transform: [{ translateY: -2 }]
 
+    },
+
+    centered: {
+
+        justifyContent: 'center'
     }
 
 })

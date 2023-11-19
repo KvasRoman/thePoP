@@ -3,7 +3,6 @@ import { StackNavigationOptions, createStackNavigator } from '@react-navigation/
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/home.screen';
 import GuideScreen from '../screens/guide.screen';
-import { DEFAULT_COLORS } from '../global-styles/colors';
 const Stack = createStackNavigator();
 export default function Routes() {
   return (

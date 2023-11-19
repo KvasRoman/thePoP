@@ -1,4 +1,4 @@
-import Animated, { AnimatableValue, Easing, Keyframe, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import { AnimatableValue, withDelay, withSequence, withTiming } from 'react-native-reanimated';
 export class AnimationBuilder<Type extends AnimatableValue>{
 
     private states: { value: Type, progress: number }[]

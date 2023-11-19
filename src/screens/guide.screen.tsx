@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { StatusBar, View, Text, StyleSheet, Pressable } from "react-native";
+import React from "react";
+import { StatusBar, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DEFAULT_COLORS } from "../global-styles/colors";
 import Guide from "../components/guideCards/add-task-guide";
-import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {  Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 
 
